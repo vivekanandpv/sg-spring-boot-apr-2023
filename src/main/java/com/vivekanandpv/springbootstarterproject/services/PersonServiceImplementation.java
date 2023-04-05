@@ -34,6 +34,6 @@ public class PersonServiceImplementation implements PersonService {
 
     @Override
     public void delete(int id) {
-
+        throw new RuntimeException("Oops!!!");
     }
 }
