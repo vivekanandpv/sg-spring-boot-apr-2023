@@ -2,6 +2,7 @@ package com.vivekanandpv.springbootstarterproject.apis;
 
 import com.vivekanandpv.springbootstarterproject.models.Person;
 import com.vivekanandpv.springbootstarterproject.services.PersonService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +22,13 @@ public class PersonsApi {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @GetMapping("{id}")
+    @GetMapping(value = "{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Person> get(@PathVariable int id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Person> create(@RequestBody Person person) {
         return ResponseEntity.ok(service.create(person));
     }
