@@ -43,10 +43,4 @@ public class PersonsApi {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
-    @ExceptionHandler
-    public ResponseEntity<?> handleException(RuntimeException exception) {
-        //  log the exception
-        return ResponseEntity.badRequest().build();
-    }
 }
