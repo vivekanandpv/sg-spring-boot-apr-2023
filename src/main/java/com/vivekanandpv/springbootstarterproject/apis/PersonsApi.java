@@ -2,6 +2,8 @@ package com.vivekanandpv.springbootstarterproject.apis;
 
 import com.vivekanandpv.springbootstarterproject.models.Person;
 import com.vivekanandpv.springbootstarterproject.services.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/persons")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"})
+
+@Api(tags = {"Persons API"})
 public class PersonsApi {
     private final PersonService service;
 
@@ -18,6 +23,7 @@ public class PersonsApi {
     }
 
     @GetMapping
+    @ApiOperation(value = "Get all persons")
     public ResponseEntity<List<Person>> get() {
         return ResponseEntity.ok(service.getAll());
     }
