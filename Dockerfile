@@ -18,7 +18,12 @@ ADD ${JAR_FILE} spring-dockerizing.jar
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/spring-dockerizing.jar"]
 
 
-# Command to build the docker image
+#   To create the package:
+#   mvn clean
+#   mvn package
+
+
+#   Command to build the docker image
 #   docker image build --tag sg-spring .
 
 #   Command to run the container
