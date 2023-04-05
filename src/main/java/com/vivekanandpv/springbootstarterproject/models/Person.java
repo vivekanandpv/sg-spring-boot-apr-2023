@@ -1,14 +1,22 @@
 package com.vivekanandpv.springbootstarterproject.models;
 
+import javax.persistence.*;
+
+@Entity
 public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
 
-    public Person(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {

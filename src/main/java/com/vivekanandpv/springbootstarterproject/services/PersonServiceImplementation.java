@@ -1,25 +1,40 @@
 package com.vivekanandpv.springbootstarterproject.services;
 
+import com.vivekanandpv.springbootstarterproject.config.AppConfig;
 import com.vivekanandpv.springbootstarterproject.models.Person;
-import org.springframework.stereotype.Component;
+import com.vivekanandpv.springbootstarterproject.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonServiceImplementation implements PersonService {
+    private final AppConfig config;
+    private final PersonRepository repository;
+
+    public PersonServiceImplementation(AppConfig config, PersonRepository repository) {
+        this.config = config;
+        this.repository = repository;
+    }
+
     @Override
     public List<Person> getAll() {
-        return List.of(
-                new Person("John", "Doe", "john@gmail.com"),
-                new Person("Mark", "Doe", "mark@gmail.com"),
-                new Person("Clyde", "Doe", "clyde@gmail.com")
-        );
+        return repository.findAll();
     }
 
     @Override
     public Person getById(int id) {
-        return new Person("John " + id, "Doe", "john@gmail.com");
+//        Optional<Person> optional = repository.findById(id);
+//
+//        if (optional.isPresent()) {
+//            return optional.get();
+//        } else {
+//            throw new RuntimeException("could not find");
+//        }
+
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Could not find the record"));
     }
 
     @Override
