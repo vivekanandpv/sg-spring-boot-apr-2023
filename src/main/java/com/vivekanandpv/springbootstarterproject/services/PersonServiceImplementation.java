@@ -39,16 +39,28 @@ public class PersonServiceImplementation implements PersonService {
 
     @Override
     public Person create(Person person) {
-        return new Person("John", "Doe", "john@gmail.com");
+        repository.saveAndFlush(person);
+        return person;
     }
 
     @Override
     public Person update(int id, Person person) {
-        return new Person("John " + id, "Doe", "john@gmail.com");
+        Person personDb = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Could not find the record"));
+
+        personDb.setFirstName(person.getFirstName());
+        personDb.setLastName(person.getLastName());
+        personDb.setEmail(person.getEmail());
+
+        repository.saveAndFlush(personDb);
+        return person;
     }
 
     @Override
     public void delete(int id) {
-        throw new RuntimeException("Oops!!!");
+        Person personDb = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Could not find the record"));
+
+        repository.delete(personDb);
     }
 }

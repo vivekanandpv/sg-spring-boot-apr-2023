@@ -22,13 +22,13 @@ public class PersonsApi {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @GetMapping(value = "{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(value = "{id}")
     public ResponseEntity<Person> get(@PathVariable int id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
 
-    @PostMapping(consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping
     public ResponseEntity<Person> create(@RequestBody Person person) {
         return ResponseEntity.ok(service.create(person));
     }
